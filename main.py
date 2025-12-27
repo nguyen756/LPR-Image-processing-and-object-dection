@@ -10,8 +10,6 @@ import os
 from modules.ai import LPR_Engine
 from modules import processing
 import config 
-
-# --- ARGUMENT PARSING ---
 parser = argparse.ArgumentParser()
 parser.add_argument("--host", type=str, default="0.0.0.0")
 parser.add_argument("--port", type=int, default=8000)
@@ -69,6 +67,7 @@ def main():
                 if plate_crop.shape[0] == 0 or plate_crop.shape[1] == 0:
                     continue
                 plate_crop_processed = processing.preprocess_for_ocr(plate_crop)
+                cv2.imshow("Plate Crop", plate_crop_processed)
                 is_split, parts = processing.split_plate(plate_crop_processed)
                 raw_text = engine.read_text(parts)
                 clean_text = engine.clean_vn_plate(raw_text)
