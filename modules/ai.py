@@ -1,7 +1,7 @@
 import re
 from ultralytics import YOLO
 import easyocr
-import config
+from config import config
 
 class LPR_Engine:
     def __init__(self):

@@ -9,11 +9,13 @@ import os
 
 from modules.ai import LPR_Engine
 from modules import processing
-import config 
+import config.config as config 
+
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--host", type=str, default="0.0.0.0")
 parser.add_argument("--port", type=int, default=8000)
-parser.add_argument("--model", type=str, default="license_plate_detector.pt")
+parser.add_argument("--model", type=str, default="assets/license_plate_detector.pt")
 args = parser.parse_args()
 
 def main():
