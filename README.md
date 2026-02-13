@@ -1,11 +1,11 @@
 # License plate recognition
 #### *Declaration: this system used [Muhammad-Zeerak-Khan](https://github.com/Muhammad-Zeerak-Khan/Automatic-License-Plate-Recognition-using-YOLOv8/blob/main/license_plate_detector.pt) YOLOv8 specially for license plate recognition.* 
 
-System Architecture
+## System Architecture
 This system is intentionally decoupled into a lightweight client-side capture node and a heavy, headless server-side inference engine in real time.
 
 
-Tech Usage
+## Tech Usage
 * **Deployment:** Docker/Launcher for local
 * **Computer Vision:** OpenCV (Headless)
 * **Object Detection:** YOLOv8 
