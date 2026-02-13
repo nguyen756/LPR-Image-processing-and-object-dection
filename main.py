@@ -69,7 +69,7 @@ def main():
                 if plate_crop.shape[0] == 0 or plate_crop.shape[1] == 0:
                     continue
                 plate_crop_processed = processing.preprocess_for_ocr(plate_crop)
-                cv2.imshow("Plate Crop", plate_crop_processed)
+                #cv2.imshow("Plate Crop", plate_crop_processed)
                 is_split, parts = processing.split_plate(plate_crop_processed)
                 raw_text = engine.read_text(parts)
                 clean_text = engine.clean_vn_plate(raw_text)
