@@ -45,7 +45,10 @@ Replace `http://127.0.0.1:8000/detect` with the actual server url.
 
 
 
-3. **Client side: Ipwebcame/local webcam/rasberrypi with camera module**
+
+
+
+4. **Alternative Client side with main.py: Ipwebcame/local webcam/rasberrypi with camera module**
 ```bash 
 python pi_stream.py --server_ip "SERVER_IP" --port 8000 --camera "0"
 ``` 
