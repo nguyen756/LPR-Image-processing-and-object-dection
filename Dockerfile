@@ -21,10 +21,13 @@ RUN pip install --no-cache-dir --default-timeout=1000 \
     numpy \
     opencv-python-headless \
     ultralytics \
-    easyocr
+    easyocr \
+    uvicorn \
+    fastapi \
+    python-multipart
 
 # copy the code into docker image
 COPY . .
 
 # run with cmd+args
-CMD ["python", "main.py", "--server_ip", "0.0.0.0"]
+CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8000"]
