@@ -26,14 +26,25 @@ This system is intentionally decoupled into a lightweight client-side capture no
 # Usage 
 ### **Docker:**
 
+#### *currently modified for cloud run* 
+
+
 1. **Build the Image:**
 ```bash
    docker build -t lpr-engine .
 ```
 2. **Run the Container(Port 8000):**
 ```bash 
-docker run -p 8000:8000 lpr-engine python -u main.py --host 0.0.0.0 --port 8000
+docker run -p 8000:8000 lpr-engine
 ```
+3. **When the container is up, from the client side:**
+```bash
+python api_client.py
+```
+Replace `http://127.0.0.1:8000/detect` with the actual server url.
+
+
+
 3. **Client side: Ipwebcame/local webcam/rasberrypi with camera module**
 ```bash 
 python pi_stream.py --server_ip "SERVER_IP" --port 8000 --camera "0"
