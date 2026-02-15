@@ -54,3 +54,13 @@ python pi_stream.py --server_ip "SERVER_IP" --port 8000 --camera "0"
 ``` 
 Replace `SERVER_IP` with actual server ip, 127.0.0.1 if run locally
 
+
+
+## Database (supabase) set up
+#### Create capture_plates table with 4 columns:
+* `id`: (Type: int8 or UUID, Primary Key, auto-increment)
+* `plate_number`: (Type: text)
+* `confidence`: (Type: float4)
+* `created_at`: (Type: timestamptz, default to now()) - `totally optional`
+
+
