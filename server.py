@@ -1,5 +1,7 @@
 import time
 import os
+import dotenv
+from supabase import create_client, Client
 import cv2
 import numpy as np
 from fastapi import FastAPI, UploadFile, File
@@ -14,6 +16,10 @@ print("Loading AI Engine")
 engine = LPR_Engine()
 print(f"{engine} Engine Loaded")
 
+dotenv.load_dotenv()
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 @app.post("/detect")
 async def detect_plate(image: UploadFile = File(...)):
@@ -42,12 +48,15 @@ async def detect_plate(image: UploadFile = File(...)):
                 clean_text = engine.clean_vn_plate(raw_text)
                 if clean_text:
                     print(f"PLATE FOUND: {clean_text}")
+                    try:
+                        data={"plate_number": clean_text, "confidence": float(conf)}
+                        supabase.table("captured_plates").insert(data).execute()
+                        print(f"Inserted into database: {data}")
+                    except Exception as e:
+                        print(f"Failed to insert data: {e}")
                     img = processing.draw_result(img, clean_text, (x1,y1,x2,y2))
                     timestamp = int(time.time())
                     filename = f"{config.SAVE_FOLDER}/{clean_text}_{timestamp}.png"
-                    if not os.path.exists(filename):
-                        cv2.imwrite(filename, plate_crop)
-                        print(f"SAVED {filename}")
                     results.append({
                         "plate_number": clean_text,
                         "confidence": float(conf)
@@ -57,7 +66,8 @@ async def detect_plate(image: UploadFile = File(...)):
                     if config.PRINT_LOGS:
                         print(f"REJECT: '{raw_text}'")
         return {
-            "status": "success",
+            "status": "ok",
+            "detections": len(results),
             "detected_plates": results
         }
     except Exception as e:
