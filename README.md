@@ -10,11 +10,14 @@ This system is intentionally decoupled into a lightweight client-side capture no
 * **Computer Vision:** OpenCV (Headless)
 * **Object Detection:** YOLOv8 
 * **OCR:** EasyOCR
-* **Networking:** Python Sockets (TCP)
+* **Networking:** `pi_stream`-Python Sockets (TCP) / `api_client`-REST API (HTTP via FastAPI)
+
 
  **Headless Execution:** Designed to run in headless Linux environment(Docker, Cloud environment).
 ### Pipeline  
-1. **Ingestion Layer (`main.py`):** Receives raw byte-streams via TCP socket, decodes the `.jpg` payload using OpenCV, and hands it to the AI Engine.
+1. **Ingestion Layer (`main.py`/`server.py`):**
+* ` main.py ` Receives raw byte-streams via TCP socket, decodes the `.jpg` payload using OpenCV, and hands it to the AI Engine. 
+* `server.py` FastAPI endpoints receive image payloads via HTTP POST, decode the .jpg using OpenCV, and hand it to the AI Engine.
 2. **Detection Layer (`modules/ai.py`):** YOLOv8 scans the frame for vehicles and outputs bounding box coordinates and confidence scores.
 3. **Tracking Layer (`modules/tracker.py`):** Assigns persistent IDs to detected boxes using Euclidean distance logic. Crucial optimization: Prevents the OCR engine from re-processing the same vehicle across multiple frames.
 4. **Sanitization Layer (`modules/processing.py`):** * Crops the bounding box.
