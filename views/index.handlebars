@@ -1,0 +1,25 @@
+<div class="container">
+
+<div class="row text-uppercase fw-bold pb-2" style="border-bottom:2px solid white;">
+    <div class="col-4">Timestamp</div>
+    <div class="col-4 text-center">License Plate</div>
+    <div class="col-4 text-end">Confidence</div>
+</div>
+
+{{#if plates.length}}
+  {{#each plates}}
+    <div class="row plate-row">
+        <div class="col-4">{{formatDate created_at}}</div>
+        <div class="col-4 text-center fw-bold text-warning">{{plate_number}}</div>
+        <div class="col-4 text-end">{{formatConfidence confidence}}%</div>
+    </div>
+  {{/each}}
+{{else}}
+  <div class="row mt-4">
+      <div class="col-12 text-center text-muted">
+          No plates captured yet. Waiting for edge device...
+      </div>
+  </div>
+{{/if}}
+
+</div>
