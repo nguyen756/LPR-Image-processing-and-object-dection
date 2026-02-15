@@ -64,8 +64,8 @@ Replace `SERVER_IP` with actual server ip, 127.0.0.1 if run locally
 * `created_at`: (Type: timestamptz, default to now()) - `totally optional`
 
 ### *Dotenv*
-SUPABASE_URL=https://                  .co
-SUPABASE_KEY= (anon)
+* SUPABASE_URL=https://                  .co
+* SUPABASE_KEY= (anon)
 
 ## UI viewer
 1. npm i
