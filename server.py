@@ -1,6 +1,6 @@
 import time
 import os
-import dotenv
+
 from supabase import create_client, Client
 import cv2
 import numpy as np
@@ -16,7 +16,11 @@ print("Loading AI Engine")
 engine = LPR_Engine()
 print(f"{engine} Engine Loaded")
 
-dotenv.load_dotenv()
+try:
+    import dotenv
+    dotenv.load_dotenv()
+except ImportError:
+    pass
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)

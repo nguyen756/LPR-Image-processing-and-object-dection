@@ -13,21 +13,14 @@ WORKDIR /app
 # pip install
 RUN pip install --upgrade pip
 
+# copy the code into docker image
+COPY . .
+
 # avoiding timeout issues by installing torch seperately
 RUN pip install --no-cache-dir --default-timeout=1000 torch torchvision
 
 # install the rest of the dependencies
-RUN pip install --no-cache-dir --default-timeout=1000 \
-    numpy \
-    opencv-python-headless \
-    ultralytics \
-    easyocr \
-    uvicorn \
-    fastapi \
-    python-multipart
-
-# copy the code into docker image
-COPY . .
+RUN pip install --no-cache-dir --default-timeout=1000 -r requirements.txt
 
 # run with cmd+args
 CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8000"]
