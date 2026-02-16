@@ -67,9 +67,10 @@ Replace `SERVER_IP` with actual server ip, 127.0.0.1 if run locally
 * `created_at`: (Type: timestamptz, default to now()) - `totally optional`
 
 ### *Dotenv*
-* SUPABASE_URL=https://                  .co
-* SUPABASE_KEY= (anon)
+* SUPABASE_URL=https://[.......].supabase.co
+* SUPABASE_KEY=[ANON_KEY]
+* API_SERVER_URL=https://[aws]/detect
 
 ## UI viewer
-1. npm i
+1. npm install
 2. node server.js

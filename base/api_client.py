@@ -1,8 +1,11 @@
+import os
 import cv2
+import dotenv
 import requests
 import time
+dotenv.load_dotenv()
+server_url = os.getenv("API_SERVER_URL", "http://127.0.0.1:8000/detect")
 
-server_url = "http://127.0.0.1:8000/detect"
 
 
 
