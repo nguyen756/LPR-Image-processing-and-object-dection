@@ -5,6 +5,7 @@ import { engine } from 'express-handlebars';
 import { fileURLToPath } from 'url';
 
 
+// handlebars for UI
 
 import path from 'path';
 const __filename = fileURLToPath(import.meta.url);
@@ -28,7 +29,7 @@ app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
 
-
+// get the database ready before running this
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);

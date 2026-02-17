@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 
+
+# image processing part
 def preprocess_for_ocr(img):
     if len(img.shape) == 3:
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -12,6 +14,11 @@ def preprocess_for_ocr(img):
     denoised = cv2.bilateralFilter(enhanced, 9, 75, 75)
     return denoised
 
+
+
+
+
+# rotate image
 def deskew(img_gray):
     try:
         _, thresh = cv2.threshold(img_gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
@@ -38,7 +45,7 @@ def deskew(img_gray):
         
     except Exception:
         return img_gray
-
+# find the split point of 2 rows plate, this part is for vietnamese plate, adjust the rules for other countries if needed
 def find_split_point(img_gray):
     
     try:
@@ -59,7 +66,7 @@ def find_split_point(img_gray):
         return split_index
     except:
         return img_gray.shape[0] // 2
-
+# 2 cases of vietnamese plate, it's either 1 or 2 rows, this part split for 2 rows case, change the threshold and rules for other countries if needed
 def split_plate(plate_img):
     if len(plate_img.shape) == 3:
         gray = cv2.cvtColor(plate_img, cv2.COLOR_BGR2GRAY)
@@ -87,7 +94,7 @@ def split_plate(plate_img):
     
     else:
         return False, [processed_img]
-
+# draw result on the image for visualization, normally not needed for APi but whatever, dont bother ts.
 def draw_result(frame, text, box):
     x1, y1, x2, y2 = box
     cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)

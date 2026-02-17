@@ -61,6 +61,7 @@ async def detect_plate(image: UploadFile = File(...)):
                     img = processing.draw_result(img, clean_text, (x1,y1,x2,y2))
                     timestamp = int(time.time())
                     filename = f"{config.SAVE_FOLDER}/{clean_text}_{timestamp}.png"
+                    # bounce back to client
                     results.append({
                         "plate_number": clean_text,
                         "confidence": float(conf)
@@ -69,6 +70,7 @@ async def detect_plate(image: UploadFile = File(...)):
                 else:
                     if config.PRINT_LOGS:
                         print(f"REJECT: '{raw_text}'")
+        # return the results as JSON
         return {
             "status": "ok",
             "detections": len(results),

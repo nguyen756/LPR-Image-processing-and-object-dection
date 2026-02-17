@@ -12,9 +12,9 @@ from PIL import Image, ImageTk
 
 
 SETTINGS_FILE = "config\config_settings.json"
-LOGO_FILENAME = "assets\logo_ute.png"
+LOGO_FILENAME = "assets\logo.png"
 
-
+    
 
 DEFAULTS = {
     "host_ip": "0.0.0.0",
@@ -25,6 +25,8 @@ DEFAULTS = {
     "pc_ip": "192.168.1.112",
     "camera_url": "0"
 }
+
+
 log_queue = queue.Queue()
 server_process = None
 is_server_running = False
@@ -213,7 +215,7 @@ try:
         lbl_logo.image = logo_tk
         lbl_logo.pack()
     else:
-        tk.Label(logo_frame, text="[LOGO UTE]", bg=STYLE_HEADER, fg="white", font=("Arial", 12, "bold")).pack()
+        tk.Label(logo_frame, text="logo", bg=STYLE_HEADER, fg="white", font=("Arial", 12, "bold")).pack()
 except: pass
 title_frame = tk.Frame(header, bg=STYLE_HEADER)
 title_frame.pack(side="left")

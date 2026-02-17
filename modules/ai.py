@@ -21,7 +21,7 @@ class LPR_Engine:
                     x1, y1, x2, y2 = box.xyxy[0].cpu().numpy().astype(int)
                     detections.append([x1, y1, x2, y2, conf])
         return detections
-
+    # read text from list, if prob>threshhold, add to full_text
     def read_text(self, image_parts):
         full_text = ""
         for part in image_parts:
@@ -31,7 +31,7 @@ class LPR_Engine:
                 if prob > 0.3: 
                     full_text += text
         return full_text
-
+    # rules of the plate, adjust to the corresponding country
     def clean_vn_plate(self, text):
         text = re.sub(r'[^A-Za-z0-9]', '', text).upper() 
         to_num = {'O': '0', 'D': '0', 'I': '1', 'L': '1', 'Z': '2', 'S': '5', 'B': '8', 'G': '6', 'A': '4'}

@@ -5,7 +5,7 @@ class Tracker:
         self.next_id = 0
         self.objects = {} 
         self.max_lost = max_lost
-
+    # tracking logic, use morphological distance calculation to see if the object(plate) already exist and had been OCRed, if not then add to the list.
     def update(self, rects, frame):
         updated_objects = {}
         crops_to_ocr = [] 
@@ -42,7 +42,7 @@ class Tracker:
 
         self.objects = updated_objects
         return updated_objects, crops_to_ocr
-
+    # as the name suggested 
     def set_identified(self, obj_id):
         if obj_id in self.objects:
             rect, lost, conf, _ = self.objects[obj_id]
